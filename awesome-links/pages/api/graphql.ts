@@ -1,22 +1,18 @@
-// Copyright 2023 XinGuan
-// 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// 
-//     http://www.apache.org/licenses/LICENSE-2.0
-// 
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// /pages/api/graphql.ts
+import { createYoga } from 'graphql-yoga'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { schema } from '../../graphql/schema'
 
-import prisma from '../../lib/prisma'
-export const resolvers = {
-    Query: {
-        links: () => {
-            return prisma.link.findMany()
-        },
-    },
+export default createYoga<{
+  req: NextApiRequest
+  res: NextApiResponse
+}>({
+  schema,
+  graphqlEndpoint: '/api/graphql'
+})
+
+export const config = {
+  api: {
+    bodyParser: false
+  }
 }
