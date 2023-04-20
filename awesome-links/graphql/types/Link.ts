@@ -1,6 +1,18 @@
 // /graphql/types/Link.ts
 import { builder } from "../builder";
 
+builder.prismaObject('Link', {
+  fields: (t) => ({
+    id: t.exposeID('id'),
+    title: t.exposeString('title'),
+    url: t.exposeString('url'),
+    description: t.exposeString('description'),
+    imageUrl: t.exposeString('imageUrl'),
+    category: t.exposeString('category'),
+    users: t.relation('users')
+  })
+})
+
 // 1. Defines a query type called links
 builder.queryField("links", (t) =>
     // 2. Defines the field that will resolve to the generated Prisma Client types
@@ -13,4 +25,3 @@ builder.queryField("links", (t) =>
             prisma.link.findMany({ ...query })
     })
 )
-
