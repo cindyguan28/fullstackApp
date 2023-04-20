@@ -12,27 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// pages/api/graphql.ts
-
-import { createSchema, createYoga } from 'graphql-yoga'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { resolvers } from '../../graphql/resolvers'
-import { typeDefs } from '../../graphql/schema'
-
-
-export default createYoga<{
-    req: NextApiRequest
-    res: NextApiResponse
-}>({
-    schema: createSchema({
-        typeDefs,
-        resolvers
-    }),
-    graphqlEndpoint: '/api/graphql'
-})
-
-export const config = {
-    api: {
-        bodyParser: false
-    }
+import prisma from '../../lib/prisma'
+export const resolvers = {
+    Query: {
+        links: () => {
+            return prisma.link.findMany()
+        },
+    },
 }
