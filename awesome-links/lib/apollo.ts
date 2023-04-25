@@ -12,30 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// prisma/seed.ts
+import {
+    ApolloClient, InMemoryCache
+} from "@apollo/client";
 
-import { PrismaClient } from '@prisma/client'
-import { links } from '../awesome-links/data/links'
-const prisma = new PrismaClient()
+const apolloClient = new ApolloClient({
+    uri: '/api/graphql',
+    cache: new InMemoryCache(),
+})
 
-async function main() {
-    await prisma.user.create({
-        data: {
-            email: `testemail@gmail.com`,
-            role: 'ADMIN',
-        },
-    })
-
-    await prisma.link.createMany({
-        data: links,
-    })
-}
-
-main()
-    .catch(e => {
-        console.error(e)
-        process.exit(1)
-    })
-    .finally(async () => {
-        await prisma.$disconnect()
-    })
+export default apolloClient
