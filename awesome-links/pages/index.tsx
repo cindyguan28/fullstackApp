@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { AwesomeLink } from '../components/AwesomeLink';
 import type { Link } from '@prisma/client';
+import React from 'react';
 
 const AllLinksQuery = gql`
   query allLinksQuery($first: Int, $after: ID) {

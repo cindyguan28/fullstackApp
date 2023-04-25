@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import { ApolloProvider } from '@apollo/client';
 import apolloClient from '../lib/apollo';
 import type { AppProps } from 'next/app';
+import React from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

@@ -1,5 +1,5 @@
 // /graphql/types/Link.ts
-import { builder } from "../builder";
+import { builder } from "../builder"
 
 builder.prismaObject('Link', {
   fields: (t) => ({
